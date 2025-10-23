@@ -5,7 +5,9 @@ import ExportSvg from '@/assets/svgs/export.svg?react'
 import SettingsSvg from '@/assets/svgs/settings-black.svg?react'
 import type { SelectWrapperProps } from '@/types/global-type'
 import SelectWrapper from '@/components/wrappers/SelectWrapper'
+import { useState } from 'react'
 function Status() {
+    const [columnName, setColumnName] = useState<string>('')
     const stagingItem: SelectWrapperProps = {
         items: [
             {
@@ -21,6 +23,8 @@ function Status() {
                 placeHolder: 'Beta',
             },
         ],
+        columnName: columnName,
+        selectState: setColumnName,
     }
     return (
         <div className="flex justify-between">
@@ -34,7 +38,11 @@ function Status() {
                     </p>
                 </div>
                 <div className="flex justify-between">
-                    <SelectWrapper items={stagingItem.items} />
+                    <SelectWrapper
+                        items={stagingItem.items}
+                        selectState={stagingItem.selectState}
+                        width="12.3125rem"
+                    />
                     <div className="flex gap-4">
                         <StatusHelpers
                             Element={StatusSVG}

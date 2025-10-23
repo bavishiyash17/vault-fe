@@ -1,27 +1,17 @@
 import Status from './components/Status'
-import ThreatsBlocked from '@/assets/svgs/thread-blocked.svg?react'
-import ActiveIncidents from '@/assets/svgs/active-incident.svg?react'
-import OnlineUsers from '@/assets/svgs/online-users.svg?react'
-import SystemHealth from '@/assets/svgs/system-health.svg?react'
-import type { StatusCardProps } from '@/types/dashboard'
 import { AgGridTable } from '@/components/ui/table'
-import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community'
 import { eventLogs } from '@/data/event_sample'
 import BlockedIcon from '@/assets/svgs/blocked.svg?react'
 import InProgressIcon from '@/assets/svgs/in-progress.svg?react'
 import ResolvedIcon from '@/assets/svgs/resolved.svg?react'
-import HighIcon from '@/assets/svgs/high.svg?react'
-import MediumIcon from '@/assets/svgs/medium.svg?react'
-import CriticalIcon from '@/assets/svgs/critical.svg?react'
 import SearchSvg from '@/assets/svgs/search.svg?react'
 import { Input } from '@/components/ui/input'
 import SelectWrapper from '@/components/wrappers/SelectWrapper'
 import type { SelectWrapperProps } from '@/types/global-type'
 import CalendarWrapper from '@/components/wrappers/CalendarWrapper'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import type { AgGridReact } from 'ag-grid-react'
+import { useState } from 'react'
 
-const Report = () => {
+const EventLog = () => {
     const defaultColDef = {
         flex: 1,
         cellClass: 'text-left pt-[16px]', // Tailwind center
@@ -72,53 +62,43 @@ const Report = () => {
             },
         },
     ]
-    const sample: StatusCardProps[] = [
-        {
-            Element: ThreatsBlocked,
-            title: 'Threats Blocked',
-            amount: '1,247',
-            usage: 12,
-            activity: 'Last 24 hours',
-        },
-        {
-            Element: ActiveIncidents,
-            title: 'Active Incidents',
-            amount: '3',
-            usage: -23,
-            activity: 'Currently open',
-        },
-        {
-            Element: OnlineUsers,
-            title: 'Online Users',
-            amount: '1,247',
-            usage: 5,
-            activity: 'Active sessions',
-        },
-        {
-            Element: SystemHealth,
-            title: 'System Health',
-            amount: '98.5%',
-            usage: 2,
-            activity: 'All systems',
-        },
-    ]
+    // const sample: StatusCardProps[] = [
+    //     {
+    //         Element: ThreatsBlocked,
+    //         title: 'Threats Blocked',
+    //         amount: '1,247',
+    //         usage: 12,
+    //         activity: 'Last 24 hours',
+    //     },
+    //     {
+    //         Element: ActiveIncidents,
+    //         title: 'Active Incidents',
+    //         amount: '3',
+    //         usage: -23,
+    //         activity: 'Currently open',
+    //     },
+    //     {
+    //         Element: OnlineUsers,
+    //         title: 'Online Users',
+    //         amount: '1,247',
+    //         usage: 5,
+    //         activity: 'Active sessions',
+    //     },
+    //     {
+    //         Element: SystemHealth,
+    //         title: 'System Health',
+    //         amount: '98.5%',
+    //         usage: 2,
+    //         activity: 'All systems',
+    //     },
+    // ]
 
     const [severity, setSeverity] = useState<string>('')
     const [columnName, selectColumn] = useState<string>('')
 
-    const severityOptions: SelectWrapperProps = {
-        items: [
-            { value: 'critical', placeHolder: 'Critical' },
-            { value: 'high', placeHolder: 'High' },
-            { value: 'medium', placeHolder: 'Medium' },
-            { value: 'low', placeHolder: 'Low' },
-        ],
-        selectState: setSeverity,
-        columnName: 'severity',
-        selectColumn: selectColumn,
-    }
     const statusOptions: SelectWrapperProps = {
         items: [
+            { value: 'all', placeHolder: 'All' },
             { value: 'in-progress', placeHolder: 'In Progress' },
             { value: 'blocked', placeHolder: 'Blocked' },
             { value: 'resolved', placeHolder: 'Resolved' },
@@ -168,4 +148,4 @@ const Report = () => {
     )
 }
 
-export default Report
+export default EventLog

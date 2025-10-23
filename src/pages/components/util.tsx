@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import type { StatusCardProps, StatusHelpersProps } from '@/types/dashboard'
 import NegativeSvg from '@/assets/svgs/negative.svg?react'
 import PostiiveSvg from '@/assets/svgs/positive.svg?react'
@@ -19,9 +19,11 @@ function StatusHelpers({ Element, text }: StatusHelpersProps) {
                 // className={`text-[#12A150] transition-colors duration-300 ${hoverState ? 'hover:fill-current' : ''} `}
                 className={`text-[#12A150] ${hoverState ? 'hover:fill-current' : ''} `}
             />
-            <p className={hoverState ? 'text-[#12A150]' : 'text-black'}>
-                {text}
-            </p>
+            {text && (
+                <p className={hoverState ? 'text-[#12A150]' : 'text-black'}>
+                    {text}
+                </p>
+            )}
         </div>
     )
 }

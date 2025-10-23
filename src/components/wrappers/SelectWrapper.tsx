@@ -22,11 +22,12 @@ const SelectWrapper: React.FC<SelectWrapperProps> = ({
     selectState,
     columnName,
     selectColumn,
+    prefix,
 }) => {
     return (
         <Select
             onValueChange={(value) => {
-                selectColumn(columnName)
+                selectColumn?.(columnName || '')
                 selectState(value)
             }}
         >
@@ -36,11 +37,13 @@ const SelectWrapper: React.FC<SelectWrapperProps> = ({
                     border: '1px solid #D4D4D8',
                     height: '2.5rem',
                     fontWeight: 200,
-                    width: width ? width : '6.18rem',
+                    width: width ? width : '100%',
                 }}
                 autoFocus={false}
             >
-                <SelectValue placeholder={label || items[0]?.placeHolder} />
+                <SelectValue
+                    placeholder={`${prefix ? prefix + ' :' : ''}  ${label || items[0]?.placeHolder}`}
+                />
             </SelectTrigger>
             <SelectContent className="bg-white" color="white">
                 {items.map((item, index) => (

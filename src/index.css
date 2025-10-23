@@ -203,6 +203,7 @@ button:focus-visible {
 .ag-cell[col-id="source"],
 .ag-cell[col-id="destination"] {
   color: #087AD1 !important;
+  /* padding: 0 !important; */
 }
 
 

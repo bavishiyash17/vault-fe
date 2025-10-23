@@ -1,18 +1,20 @@
-import DashBoard from './pages/Dashboard'
-import Report from './pages/EventLog'
-import { Routes, Route, BrowserRouter } from 'react-router'
+import Threats from './pages/Threats'
+import Report from './pages/Reports'
+import { Routes, Route, HashRouter } from 'react-router'
 import MainLayout from './pages/MainLayout'
+import EventLog from './pages/EventLog'
 function App() {
     return (
         <div>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
-                        <Route path="/threats" element={<DashBoard />} />
-                        <Route path="/events" element={<Report />} />
+                        <Route path="/threats" element={<Threats />} />
+                        <Route path="/events" element={<EventLog />} />
+                        <Route path="/reports" element={<Report />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     )
 }

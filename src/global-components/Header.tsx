@@ -7,7 +7,7 @@ import type { SelectWrapperProps } from '@/types/global-type'
 import { useState } from 'react'
 
 function Header() {
-    const [selectState, setSelectState] = useState<string>('hello')
+    const [_selectState, setSelectState] = useState<string>('hello')
     const selectItems: SelectWrapperProps = {
         items: [
             {

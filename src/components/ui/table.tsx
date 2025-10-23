@@ -2,11 +2,7 @@ import { AgGridReact } from 'ag-grid-react'
 import {
     AllCommunityModule,
     ModuleRegistry,
-    themeQuartz,
-    type Theme,
     type ColDef,
-    type GridReadyEvent,
-    type IFilterComp,
 } from 'ag-grid-community'
 import vaultTheme from './ag-grid-theme'
 ModuleRegistry.registerModules([AllCommunityModule])
@@ -18,22 +14,7 @@ type AgGridTableProps<T> = {
     filterValue: string
     filterColumn: string
 }
-import {
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-    type Ref,
-    type RefAttributes,
-} from 'react'
-import { Cpu } from 'lucide-react'
-
-const testTheme = themeQuartz.withParams({
-    accentColor: '#FF0000',
-    headerBackgroundColor: '#EEEEEE',
-    backgroundColor: '#FF0000',
-})
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 // Generic React component with props typed as AgGridTableProps<T>
 const AgGridTable = <T,>({
@@ -47,7 +28,7 @@ const AgGridTable = <T,>({
 
     const gridRef = useRef<AgGridReact<any>>(null)
 
-    const onGridReady = useCallback((params: any) => {
+    const onGridReady = useCallback(() => {
         setIsGridReady(true)
     }, [])
 
@@ -56,19 +37,17 @@ const AgGridTable = <T,>({
         filterValue: string
     ) => {
         if (!gridRef.current?.api) return
-
         try {
-            console.log(filterColumn)
-            const allColumns = gridRef.current.api.getAllGridColumns()
-            const columnNames = allColumns.map((column) => {
-                // You can choose to get the header name or the field name
-                // getDisplayNameForColumn retrieves the displayed header name
-                // column.getColId() retrieves the column ID (often the field name)
-                return (
-                    gridRef.current?.api.getDisplayNameForColumn(column) ||
-                    column.getColId()
-                )
-            })
+            // const allColumns = gridRef.current.api.getAllGridColumns()
+            // const columnNames = allColumns.map((column) => {
+            //     // You can choose to get the header name or the field name
+            //     // getDisplayNameForColumn retrieves the displayed header name
+            //     // column.getColId() retrieves the column ID (often the field name)
+            //     return (
+            //         gridRef.current?.api.getDisplayNameForColumn(column) ||
+            //         column.getColId()
+            //     )
+            // })
 
             const filterInstance =
                 await gridRef.current.api.getColumnFilterInstance(filterColumn)
@@ -77,19 +56,16 @@ const AgGridTable = <T,>({
                 return
             }
 
-            if (filterValue === '') {
-                console.log('Cleared')
+            if (filterValue === 'all') {
                 filterInstance.setModel(null) // Clear filter
             } else {
-                console.log('Filtered')
                 filterInstance.setModel({
-                    type: 'equals',
+                    type: 'contains',
                     filter: filterValue,
                 })
             }
 
             gridRef.current.api.onFilterChanged()
-            console.log('Completed')
         } catch (error) {
             console.error('Error applying filter:', error)
         }
@@ -112,6 +88,7 @@ const AgGridTable = <T,>({
                 rowData={rowData}
                 theme={vaultTheme}
                 onGridReady={onGridReady}
+                loadThemeGoogleFonts={true}
             />
         </div>
     )

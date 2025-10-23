@@ -40,7 +40,7 @@ const DashBoardItem: React.FC<DashBoardItemType> = ({
                       ? { backgroundColor: '#0080FB' }
                       : { background: 'transparent' }
             }
-            onClick={(e) => navigte(`/${text}`)}
+            onClick={(_e) => navigte(`/${text}`)}
         >
             <ReactComponent />
             <p className="capitalize">{text}</p>

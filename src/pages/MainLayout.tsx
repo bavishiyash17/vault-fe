@@ -1,6 +1,5 @@
 import DrawerWrapper from '@/global-components/DrawerWrapper'
 import Header from '@/global-components/Header'
-import Status from './components/Status'
 import { Outlet } from 'react-router'
 
 const MainLayout = () => {

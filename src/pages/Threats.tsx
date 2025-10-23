@@ -1,9 +1,9 @@
 import Status from './components/Status'
-import ThreatsBlocked from '@/assets/svgs/thread-blocked.svg?react'
-import ActiveIncidents from '@/assets/svgs/active-incident.svg?react'
-import OnlineUsers from '@/assets/svgs/online-users.svg?react'
-import SystemHealth from '@/assets/svgs/system-health.svg?react'
-import type { StatusCardProps } from '@/types/dashboard'
+// import ThreatsBlocked from '@/assets/svgs/thread-blocked.svg?react'
+// import ActiveIncidents from '@/assets/svgs/active-incident.svg?react'
+// import OnlineUsers from '@/assets/svgs/online-users.svg?react'
+// import SystemHealth from '@/assets/svgs/system-health.svg?react'
+// import type { StatusCardProps } from '@/types/dashboard'
 import { AgGridTable } from '@/components/ui/table'
 import { threatData } from '@/data/threat_sample'
 import BlockedIcon from '@/assets/svgs/blocked.svg?react'
@@ -19,7 +19,7 @@ import type { SelectWrapperProps } from '@/types/global-type'
 import CalendarWrapper from '@/components/wrappers/CalendarWrapper'
 import { useState } from 'react'
 
-function DashBoard() {
+function Threats() {
     const defaultColDef = {
         flex: 1,
         cellClass: 'pt-[16px]', // Tailwind center
@@ -31,7 +31,7 @@ function DashBoard() {
         {
             headerName: 'Threats',
             field: 'threatId',
-            headerClass: 'flex justify-center',
+            cellStyle: { paddingLeft: '24px' },
         },
         { field: 'detectionTime' },
         {
@@ -93,42 +93,43 @@ function DashBoard() {
             },
         },
     ]
-    const sample: StatusCardProps[] = [
-        {
-            Element: ThreatsBlocked,
-            title: 'Threats Blocked',
-            amount: '1,247',
-            usage: 12,
-            activity: 'Last 24 hours',
-        },
-        {
-            Element: ActiveIncidents,
-            title: 'Active Incidents',
-            amount: '3',
-            usage: -23,
-            activity: 'Currently open',
-        },
-        {
-            Element: OnlineUsers,
-            title: 'Online Users',
-            amount: '1,247',
-            usage: 5,
-            activity: 'Active sessions',
-        },
-        {
-            Element: SystemHealth,
-            title: 'System Health',
-            amount: '98.5%',
-            usage: 2,
-            activity: 'All systems',
-        },
-    ]
+    // const sample: StatusCardProps[] = [
+    //     {
+    //         Element: ThreatsBlocked,
+    //         title: 'Threats Blocked',
+    //         amount: '1,247',
+    //         usage: 12,
+    //         activity: 'Last 24 hours',
+    //     },
+    //     {
+    //         Element: ActiveIncidents,
+    //         title: 'Active Incidents',
+    //         amount: '3',
+    //         usage: -23,
+    //         activity: 'Currently open',
+    //     },
+    //     {
+    //         Element: OnlineUsers,
+    //         title: 'Online Users',
+    //         amount: '1,247',
+    //         usage: 5,
+    //         activity: 'Active sessions',
+    //     },
+    //     {
+    //         Element: SystemHealth,
+    //         title: 'System Health',
+    //         amount: '98.5%',
+    //         usage: 2,
+    //         activity: 'All systems',
+    //     },
+    // ]
 
     const [severity, setSeverity] = useState<string>('')
     const [columnName, selectColumn] = useState<string>('')
 
     const severityOptions: SelectWrapperProps = {
         items: [
+            { value: 'all', placeHolder: 'All' },
             { value: 'critical', placeHolder: 'Critical' },
             { value: 'high', placeHolder: 'High' },
             { value: 'medium', placeHolder: 'Medium' },
@@ -140,6 +141,7 @@ function DashBoard() {
     }
     const statusOptions: SelectWrapperProps = {
         items: [
+            { value: 'all', placeHolder: 'All' },
             { value: 'in-progress', placeHolder: 'In Progress' },
             { value: 'blocked', placeHolder: 'Blocked' },
             { value: 'resolved', placeHolder: 'Resolved' },
@@ -190,4 +192,4 @@ function DashBoard() {
     )
 }
 
-export default DashBoard
+export default Threats

@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronDownIcon } from 'lucide-react'
 import CalendarSvg from '@/assets/svgs/calendar.svg?react'
 
 import { Button } from '@/components/ui/button'
@@ -23,7 +22,7 @@ export function Calendar22() {
                     <Button
                         variant="outline"
                         id="date"
-                        className="w-48 justify-between font-normal"
+                        // className="w-48 justify-between font-normal"
                         style={{ backgroundColor: 'white', fontWeight: '200' }}
                     >
                         {date ? (
@@ -36,7 +35,7 @@ export function Calendar22() {
                                 </span>
                             </div>
                         )}
-                        <ChevronDownIcon />
+                        {/* <ChevronDownIcon /> */}
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent
